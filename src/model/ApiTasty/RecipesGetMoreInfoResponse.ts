@@ -112,7 +112,7 @@ export interface Component {
   measurements: Measurement[];
   position: number;
   raw_text: string;
-  hacks?: Hack2[];
+  hacks?: Hack[];
 }
 
 export interface Ingredient {
@@ -136,13 +136,6 @@ export interface Unit {
   display_singular: string;
   name: string;
   system: string;
-}
-
-export interface Hack2 {
-  end_index: number;
-  id: number;
-  match: string;
-  start_index: number;
 }
 
 export interface Show {
