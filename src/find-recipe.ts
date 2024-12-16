@@ -5,7 +5,7 @@ import {
 import { setClick } from "./util";
 import { modalRecipe, recipeInfo } from "./templates";
 import { getRecipesList } from "./service/ApiTastyService";
-import dataSource from "./data/recipesListDemo.json";
+//import dataSource from "./data/recipesListDemo.json";
 
 let offset = 0;
 let isLoading = false;
@@ -35,14 +35,14 @@ async function loadRecipes(query: string, tags: string[] = []): Promise<void> {
   toggleScroll(true);
 
   try {
-    // const data: RecipesListResponse = await getRecipesList(
-    //   query,
-    //   tags,
-    //   offset,
-    //   sizePage
-    // );
-    const data: RecipesListResponse =
-      dataSource as unknown as RecipesListResponse;
+     const data: RecipesListResponse = await getRecipesList(
+       query,
+       tags,
+       offset,
+       sizePage
+     );
+   // const data: RecipesListResponse =
+     // dataSource as unknown as RecipesListResponse;
 
     container.innerHTML += data.results.map(recipeInfo).join("");
 
