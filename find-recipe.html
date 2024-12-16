@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Recipe</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script type="module" src="./src/find-recipe.ts"></script>
+  </head>
+  <body>
+    <div id="spinner" class="spinner hidden"></div>
+    <div id="scroll-container">
+      <h1 class="title">Find Recipe</h1>
+      <section id="findRecipeFind">
+        <input type="text" />
+        <button class="button">Search recipe</button>
+      </section>
+      <section id="resultRecipes"></section>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <div class="modal-info">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

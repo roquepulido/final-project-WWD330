@@ -1,13 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Final Project WWD330 - Meal planer WebApp</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script type="module" src="./src/main.ts"></script>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="scroll-container">
+      <h1 class="title">Meel Planner WebApp</h1>
+      <section id="hero">
+        <div class="hero-container">
+          <img
+            src="src/img/dinner.jpg"
+            alt="Imagen hero meal planer"
+            width="400px"
+          />
+          <div class="hero-text-container">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
+              aspernatur corporis? Nam nihil quod autem incidunt aut minima eius
+              harum ut rem voluptatem voluptas suscipit dignissimos, nobis optio
+              facilis quis?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus,
+              dolore reprehenderit eius delectus vero praesentium hic?
+              Consectetur fugiat veritatis cumque atque dolorem praesentium
+              maxime nisi sed nesciunt? Molestias, minus fuga?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+              doloremque voluptates perspiciatis dolorum eius ratione vitae
+              amet, laboriosam tempora necessitatibus veritatis optio. Numquam
+              itaque ex enim dolores repellat, praesentium animi.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="button-section">
+        <div>
+          <img src="src/img/planner.jpg" alt="img meal planner" width="300" />
+          <button id="mealPlannerButton" class="button">Meal Planner</button>
+        </div>
+        <div>
+          <img src="src/img/meals.jpg" alt="img Find recipe" width="300" />
+          <button id="findRecipeButton" class="button">Find recipe</button>
+        </div>
+      </section>
+    </div>
   </body>
 </html>
