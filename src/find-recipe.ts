@@ -2,7 +2,7 @@ import {
   RecipeResult,
   RecipesListResponse,
 } from "./model/ApiTasty/RecipesListResponse";
-import { setClick } from "./util";
+import { appendLocalStorage, setClick } from "./util";
 import { modalRecipe, recipeInfo } from "./templates";
 import { getRecipesList } from "./service/ApiTastyService";
 //import dataSource from "./data/recipesListDemo.json";
@@ -35,14 +35,14 @@ async function loadRecipes(query: string, tags: string[] = []): Promise<void> {
   toggleScroll(true);
 
   try {
-     const data: RecipesListResponse = await getRecipesList(
-       query,
-       tags,
-       offset,
-       sizePage
-     );
-   // const data: RecipesListResponse =
-     // dataSource as unknown as RecipesListResponse;
+    const data: RecipesListResponse = await getRecipesList(
+      query,
+      tags,
+      offset,
+      sizePage
+    );
+    // const data: RecipesListResponse =
+    // dataSource as unknown as RecipesListResponse;
 
     container.innerHTML += data.results.map(recipeInfo).join("");
 
@@ -61,7 +61,8 @@ async function loadRecipes(query: string, tags: string[] = []): Promise<void> {
         });
 
         addRecipeButton?.addEventListener("click", () => {
-          alert(`Add Recipe clicked for recipe: ${recipe.name}`);
+          appendLocalStorage<RecipeResult>("recipes", recipe);
+          alert(`Added Recipe: ${recipe.name}`);
         });
       }
     });

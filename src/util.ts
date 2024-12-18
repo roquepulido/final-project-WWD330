@@ -28,3 +28,24 @@ export function setClick(
 ): void {
   document.querySelector(querySelector)?.addEventListener("click", callback);
 }
+
+// retrieve data from localstorage
+export function getLocalStorage(key: string): any {
+  const data: string | null = localStorage.getItem(key);
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    console.error(`Error getLlocalStorage key:${key} not found.`);
+    return null;
+  }
+}
+// save data to local storage
+export function setLocalStorage(key: string, data: any): void {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+export function appendLocalStorage<T>(key: string, data: T): void {
+  const infoLocalStorage: T[] = getLocalStorage(key);
+  infoLocalStorage.push(data);
+  setLocalStorage(key, infoLocalStorage);
+}
