@@ -102,7 +102,9 @@ img {
 .title {
   text-align: center;
 }
-
+.find-help{
+  text-align: center;
+}
 #findRecipeFind {
   margin: auto;
   display: flex;
@@ -135,6 +137,8 @@ img {
     margin: 1rem;
   }
   .card-result {
+    transition: transform 0.5s ease, opacity 0.5s ease, height 0.5s ease,
+      margin 0.5s ease, padding 0.5s ease;
     width: 30%;
     border: 2px solid black;
     border-radius: 0.6rem;
@@ -142,6 +146,14 @@ img {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+  }
+  .card-result.shrink {
+    border: none;
+    transform: scaleY(0);
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
   }
   .recipe-buttons {
     display: flex;
@@ -324,5 +336,47 @@ img {
   svg {
     fill: var(--secondary-color);
     transform: scale(1.1);
+  }
+}
+
+/* Alert Style */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.notification {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease, fadeOut 0.3s ease 3s forwards;
+}
+
+.notification.error {
+  background-color: #f44336;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
