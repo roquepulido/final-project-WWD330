@@ -2,10 +2,9 @@ import {
   RecipeResult,
   RecipesListResponse,
 } from "./model/ApiTasty/RecipesListResponse";
-import { setClick } from "./util";
+import { appendLocalStorage, setClick, showNotification } from "./util";
 import { modalRecipe, recipeInfo } from "./templates";
 import { getRecipesList } from "./service/ApiTastyService";
-//import dataSource from "./data/recipesListDemo.json";
 
 let offset = 0;
 let isLoading = false;
@@ -35,38 +34,42 @@ async function loadRecipes(query: string, tags: string[] = []): Promise<void> {
   toggleScroll(true);
 
   try {
-     const data: RecipesListResponse = await getRecipesList(
-       query,
-       tags,
-       offset,
-       sizePage
-     );
-   // const data: RecipesListResponse =
-     // dataSource as unknown as RecipesListResponse;
+    const data: RecipesListResponse = await getRecipesList(
+      query,
+      tags,
+      offset,
+      sizePage
+    );
+    if (data.count != 0) {
+      const newRecipes = data.results.map(recipeInfo).join("");
+      container.insertAdjacentHTML("beforeend", newRecipes);
 
-    container.innerHTML += data.results.map(recipeInfo).join("");
+      data.results.forEach((recipe) => {
+        const recipeCard = document.getElementById(`recipe-${recipe.id}`);
+        if (recipeCard) {
+          const moreInfoButton = recipeCard.querySelector<HTMLButtonElement>(
+            ".recipe-buttons .button:first-child"
+          );
+          const addRecipeButton = recipeCard.querySelector<HTMLButtonElement>(
+            ".recipe-buttons .button:last-child"
+          );
 
-    data.results.forEach((recipe) => {
-      const recipeCard = document.getElementById(`recipe-${recipe.id}`);
-      if (recipeCard) {
-        const moreInfoButton = recipeCard.querySelector<HTMLButtonElement>(
-          ".recipe-buttons .button:first-child"
-        );
-        const addRecipeButton = recipeCard.querySelector<HTMLButtonElement>(
-          ".recipe-buttons .button:last-child"
-        );
+          moreInfoButton?.addEventListener("click", () => {
+            openModal(recipe);
+          });
 
-        moreInfoButton?.addEventListener("click", () => {
-          openModal(recipe);
-        });
+          addRecipeButton?.addEventListener("click", () => {
+            appendLocalStorage<RecipeResult>("recipes", recipe);
+            showNotification(`Added Recipe: ${recipe.name}`);
+          });
+        }
+      });
 
-        addRecipeButton?.addEventListener("click", () => {
-          alert(`Add Recipe clicked for recipe: ${recipe.name}`);
-        });
-      }
-    });
-
-    offset += sizePage;
+      offset += sizePage;
+    } else {
+      const newMsg = `<h1>No recipes finded with word: ${query}... Try with other word 😁</h1>`;
+      container.insertAdjacentHTML("beforeend", newMsg);
+    }
   } catch (error) {
     console.error("Error loading recipes:", error);
   } finally {

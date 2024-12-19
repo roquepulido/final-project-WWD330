@@ -35,15 +35,29 @@ export function recipeInfo(data: RecipeResult): string {
 export function modalRecipe(data: RecipeResult): string {
   return /*html*/ `
   <h1 class="modal-title">${data.name}</h1>
-          <div>
+          <div class="modal-img-description">
             <img
               class="modal-image"
               src="${data.thumbnail_url}"
               alt="${data.thumbnail_alt_text}"
             />
-            <div>
+            <div class="modal-desc-ingred">
               <p class="modal-description">${data.description}</p>
-            </div>
+              <h3>Ingredients</h3>
+              <ul>
+              ${data.sections[0].components
+                .map((com) => {
+                  return /*html*/ `
+                <li>${com.ingredient.display_plural} - ${
+                    com.measurements[0].quantity == "0"
+                      ? "as desired"
+                      : `${com.measurements[0].quantity} ${com.measurements[0].unit.display_plural}`
+                  }</li>
+                `;
+                })
+                .join("")}
+              </ul>
+              </div>
           </div>
           <div>
             <h2>Steps:</h2>
